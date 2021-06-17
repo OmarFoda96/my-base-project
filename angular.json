@@ -1,9 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-base-project": {
+    "MyBaseProject": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,20 +16,31 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-base-project",
+            "outputPath": "dist/MyBaseProject",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css",
+              {
+                "input": "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+              },
+              {
+                "input": "./node_modules/slick-carousel/slick/slick.scss"
+              },
+              {
+                "input": "./node_modules/slick-carousel/slick/slick-theme.scss"
+              }
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "./node_modules/slick-carousel/slick/slick.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -62,18 +76,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "my-base-project:build"
+            "browserTarget": "MyBaseProject:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-base-project:build:production"
+              "browserTarget": "MyBaseProject:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-base-project:build"
+            "browserTarget": "MyBaseProject:build"
           }
         },
         "test": {
@@ -83,13 +97,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
@@ -101,24 +110,23 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "my-base-project:serve"
+            "devServerTarget": "MyBaseProject:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-base-project:serve:production"
+              "devServerTarget": "MyBaseProject:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "my-base-project"
+    }
+  },
+  "defaultProject": "MyBaseProject"
 }
